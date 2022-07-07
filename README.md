@@ -1,0 +1,1 @@
+# fr-items-list-generator
