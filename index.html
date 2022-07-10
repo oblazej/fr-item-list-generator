@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <title>Document</title>
-</head>
-<body>
-    <header><h1>Flight Rising Items List Generator</h1>
-    </header>
-    <textarea id="user-input"></textarea>
-    <button id="submit">Create</button>
-    <div id="user-output"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <title>Flight Rising Item List Generator</title>
+  </head>
+  <body>
+    <header><h1>Flight Rising Item List Generator</h1>
+    <p>With this tool, creating a thread with items to sell won't be a trouble anymore!</p></header>
+    <main>
+        <p>
+            Paste div with id <strong>hoard-result-items-content</strong> here:</p>
+        <textarea id="user-input"></textarea>
+        <div id="tip"><p>Lost? Watch the <a href="#">tutorial</a> first!</p>
+        <button id="submit">Create</button></div>
+        <p>List to copy:</p>
+        <div id="user-output"></div>
     <div id="user-items"></div>
+    </main>
     <script src="index.js"></script>
-</body>
+  </body>
 </html>
