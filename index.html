@@ -8,17 +8,66 @@
     <title>Flight Rising Item List Generator</title>
   </head>
   <body>
-    <header><h1>Flight Rising Item List Generator</h1>
-    <p>With this tool, creating a thread with items to sell won't be a trouble anymore!</p></header>
+    <header>
+      <h1>Flight Rising Item List Generator</h1>
+      <p>
+        With this tool, creating a thread with items to sell won't be a trouble
+        anymore!
+      </p>
+    </header>
     <main>
-        <p>
-            Paste div with id <strong>hoard-result-items-content</strong> here:</p>
-        <textarea id="user-input"></textarea>
-        <div id="tip"><p>Lost? Watch the <a href="#">tutorial</a> first!</p>
-        <button id="submit">Create</button></div>
-        <p>List to copy:</p>
-        <div id="user-output"></div>
-    <div id="user-items"></div>
+      <p><strong>Settings:</strong></p>
+      <form>
+        <span>Items per line:</span>
+        <input type="radio" name="line" checked /><label>5 (default)</label>
+        <input type="radio" name="line" /><label>4</label>
+        <input type="radio" name="line" /><label>3</label>
+        <input type="radio" name="line" /><label>2</label>
+        <input type="radio" name="line" /><label>1</label>
+        <div>
+          <input type="checkbox" />
+          <label>Name of the item next to its picture</label>
+        </div>
+        <input type="radio" name="name" checked /><label>left</label>
+        <input type="radio" name="name" /><label>right</label>
+        <div>
+          <input type="checkbox" />
+          <label>Quantity of the item next to its picture</label>
+        </div>
+        <input type="radio" name="quantity" checked /><label>left</label>
+        <input type="radio" name="quantity" /><label>right</label>
+        <div>
+          <input type="checkbox" />
+          <label>Quantity of the item next to its name</label>
+        </div>
+        <div>
+          <input type="checkbox" />
+          <label>Replace the list after pasting a new div</label>
+        </div>
+      </form>
+      <p>
+        Paste div with id #<strong>hoard-result-items-content</strong> here:
+      </p>
+      <textarea id="user-input"></textarea>
+      <div id="tip">
+        <p>Lost? Watch the <a href="#">tutorial</a> first!</p>
+        <button id="submit">Create</button>
+      </div>
+      <p><strong>List to copy:</strong></p>
+      <div id="lists">
+        <div>
+          <div id="user-items-top">
+            <button id="user-items-copy">Copy to clipboard</button>
+          </div>
+          <div id="user-items"></div>
+        </div>
+        <div>
+          <div id="user-output-top">
+            <button id="user-output-copy">Copy to clipboard</button>
+          </div>
+          <div id="user-output"></div>
+        </div>
+      </div>
     </main>
     <script src="index.js"></script>
   </body>

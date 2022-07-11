@@ -23,6 +23,10 @@ main {
     padding: 1rem;
 }
 
+form {
+    text-align: center;
+}
+
 main p {
     text-align: center;
     padding: 1rem 0.5rem;
@@ -33,16 +37,15 @@ main p {
     margin: 0 auto;
     min-width: 500px;
     max-width: 90%;
-    min-height: 400px;
+    min-height: 200px;
 }
 
-#tip {
+#tip, #lists{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-content: center;
     flex-wrap: wrap;
-    
 }
 
 #tip p {
@@ -53,4 +56,25 @@ button {
     font-size: 1.2rem;
     margin: 0.5rem;
     width: 200px;
+}
+
+#user-items, #user-output {
+    width: 500px;
+    height: 200px;
+    overflow: auto;
+    background-color: gray;
+    margin: 1rem;
+    padding: 0.5rem;
+    padding-top: 2rem;
+    color: white;
+}
+
+#user-items-top, #user-output-top {
+    position: absolute;
+}
+
+#user-items-copy, #user-output-copy {
+    position: relative;
+    top: 10px;
+    left: 10px;
 }
