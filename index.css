@@ -61,12 +61,12 @@ button {
 #user-items, #user-output {
     width: 500px;
     height: 200px;
-    overflow: auto;
     background-color: gray;
     margin: 1rem;
     padding: 0.5rem;
     padding-top: 2rem;
     color: white;
+    resize: none;
 }
 
 #user-items-top, #user-output-top {

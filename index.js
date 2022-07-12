@@ -1,26 +1,32 @@
 //TODO: settings, save settings in browser, recognize all types of items, recognize errors
+const itemsPerLineLSKey = "itemsPerLine";
+const nameNextToPictureLSKey = "nameNextToPicture";
+const nameNextToPicturePositionLSKey = "nameNextToPicturePosition";
+const quantityNextToPictureLSKey = "quantityNextToPicture";
+const quantityNextToPicturePositionLSKey = "quantityNextToPicturePosition";
+const quantityNextToNameLSKey = "quantityNextToName";
+const replaceListLSKey = "replaceList";
 
-const button = document.getElementById("submit");
-const input = document.getElementById("user-input");
-const output = document.getElementById("user-output");
-const items = document.getElementById("user-items");
+const userInput = document.getElementById("user-input");
+const iconsOutput = document.getElementById("user-output");
+const itemsOutput = document.getElementById("user-items");
 
 let settings = {
-    itemsPerLine: 5,
-    nameNextToPicture: false,
-    nameNextToPicturePosition: "left",
-    quantityNextToPicture: false,
-    quantityNextToPicturePosition: "left",
-    quantityNextToName: true,
-    replaceList: true
+    itemsPerLine: localStorage.getItem(itemsPerLineLSKey) || "5",
+    nameNextToPicture: Number(localStorage.getItem(nameNextToPictureLSKey)) || 0,
+    nameNextToPicturePosition: localStorage.getItem(nameNextToPicturePositionLSKey) || "left",
+    quantityNextToPicture: Number(localStorage.getItem(quantityNextToPictureLSKey)) || 0,
+    quantityNextToPicturePosition: localStorage.getItem(quantityNextToPicturePositionLSKey) || "left",
+    quantityNextToName: Number(localStorage.getItem(quantityNextToNameLSKey)) || 1,
+    replaceList: Number(localStorage.getItem(replaceListLSKey)) || 1
 }
 
-button.onclick = function (e) {
+const createList = () => {
     try {
         const template = document.createElement("template");
         let list = [];
-        template.innerHTML = input.value;
-        input.value = "";
+        template.innerHTML = userInput.value;
+        userInput.value = "";
     
         for (let i = 0; i < template.content.firstChild.childNodes.length; i++) {
             if (i % 2 === 1) {
@@ -51,11 +57,45 @@ button.onclick = function (e) {
         console.log(list)
     
         list.forEach(function (item) {
-            output.textContent += `${item.name} x${item.quantity}, `
-            items.textContent += `[item=${item.name}]`
+            iconsOutput.textContent += `${item.name} x${item.quantity}, `
+            itemsOutput.value += `[item=${item.name}]`
         })
     } catch {
         console.log("error")
     }
 
 }
+
+const changeItemsPerLineSettings = () => {
+    document.getElementsByName("line").forEach((element) => element.addEventListener("click", function(e) {settings.itemsPerLine = e.target.value;
+        localStorage.setItem(itemsPerLineLSKey, settings.itemsPerLine)}));
+    document.getElementsByName("name-next-to-picture")[0].addEventListener("click", function(e) { settings.nameNextToPicture = Number(e.target.checked) 
+        localStorage.setItem(nameNextToPictureLSKey, settings.nameNextToPicture)});
+    document.getElementsByName("name-position").forEach((element) => element.addEventListener("click", function(e) {settings.nameNextToPicturePosition = e.target.value;
+        localStorage.setItem(nameNextToPicturePositionLSKey, settings.nameNextToPicturePosition)}) )
+}
+
+const mapSettingsToFrontend = () => {
+    document.getElementsByName("line").forEach((element) => {if(element.value === settings.itemsPerLine) element.checked = true});
+    document.getElementsByName("name-next-to-picture")[0].checked = Boolean(settings.nameNextToPicture);
+    document.getElementsByName("name-position").forEach((element) => {if(element.value === settings.nameNextToPicturePosition) element.checked = true});
+    document.getElementsByName("quantity")[0].checked = Boolean(settings.quantityNextToPicture);
+}
+
+const copyToClipboard = (e) => {
+    let copyText = document.getElementById(e.target.dataset.text);
+    console.log(copyText)
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /* For mobile devices */
+    navigator.clipboard.writeText(copyText.value);
+  }
+
+const init = () => {
+    document.getElementById("create").onclick = createList;
+    document.getElementById("user-output-copy").addEventListener("click", copyToClipboard);
+    document.getElementById("user-items-copy").addEventListener("click", copyToClipboard);
+    mapSettingsToFrontend();
+    changeItemsPerLineSettings();
+}
+
+init();
