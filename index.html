@@ -19,29 +19,63 @@
       <p><strong>Settings:</strong></p>
       <form>
         <span>Items per line:</span>
-        <input type="radio" name="line" value="5" /><label>5 (default)</label>
-        <input type="radio" name="line" value="4" /><label>4</label>
-        <input type="radio" name="line" value="3" /><label>3</label>
-        <input type="radio" name="line" value="2" /><label>2</label>
-        <input type="radio" name="line" value="1" /><label>1</label>
+        <input type="radio" name="itemsPerLine" value="5" /><label
+          >5 (default)</label
+        >
+        <input type="radio" name="itemsPerLine" value="4" /><label>4</label>
+        <input type="radio" name="itemsPerLine" value="3" /><label>3</label>
+        <input type="radio" name="itemsPerLine" value="2" /><label>2</label>
+        <input type="radio" name="itemsPerLine" value="1" /><label>1</label>
         <div>
-          <input type="checkbox" name="name-next-to-picture" />
+          <input type="checkbox" name="nameNextToPicture" />
           <label>Name of the item next to its picture</label>
         </div>
-        <input type="radio" name="name-position" value="left"/><label>left</label>
-        <input type="radio" name="name-position" value="right"/><label>right</label>
+        <div id="nameNextToPicture">
+          <input
+            type="radio"
+            name="nameNextToPicturePosition"
+            value="left"
+          /><label>left</label>
+          <input
+            type="radio"
+            name="nameNextToPicturePosition"
+            value="right"
+          /><label>right</label>
+        </div>
         <div>
-          <input type="checkbox" name="quantity"/>
+          <input type="checkbox" name="quantityNextToPicture" />
           <label>Quantity of the item next to its picture</label>
         </div>
-        <input type="radio" name="quantity-position" /><label>left</label>
-        <input type="radio" name="quantity-position" /><label>right</label>
-        <div>
-          <input type="checkbox" />
-          <label>Quantity of the item next to its name</label>
+        <div id="quantityNextToPicture">
+          <input
+            type="radio"
+            name="quantityNextToPicturePosition"
+            value="left"
+          /><label>left</label>
+          <input
+            type="radio"
+            name="quantityNextToPicturePosition"
+            value="right"
+          /><label>right</label>
         </div>
         <div>
-          <input type="checkbox" />
+          <input type="checkbox" name="quantityNextToName" />
+          <label>Quantity of the item next to its name</label>
+        </div>
+        <div id="quantityNextToName">
+        <input
+          type="radio"
+          name="quantityNextToNamePosition"
+          value="left"
+        /><label>left</label>
+        <input
+          type="radio"
+          name="quantityNextToNamePosition"
+          value="right"
+        /><label>right</label>
+      </div>
+        <div>
+          <input type="checkbox" name="replaceList" />
           <label>Replace the list after pasting a new div</label>
         </div>
       </form>
@@ -57,13 +91,17 @@
       <div id="lists">
         <div>
           <div id="user-items-top">
-            <button data-text="user-items" id="user-items-copy">Copy to clipboard</button>
+            <button data-text="user-items" id="user-items-copy">
+              Copy to clipboard
+            </button>
           </div>
           <textarea readonly id="user-items"></textarea>
         </div>
         <div>
           <div id="user-output-top">
-            <button  data-text="user-output" id="user-output-copy">Copy to clipboard</button>
+            <button data-text="user-output" id="user-output-copy">
+              Copy to clipboard
+            </button>
           </div>
           <textarea readonly id="user-output"></textarea>
         </div>
