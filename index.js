@@ -49,9 +49,14 @@ const createList = () => {
         }
         console.log(list)
     
-        list.forEach(function (item) {
+        list.forEach(function (item, index) {
+            if ((index + 1) % Number(settings.itemsPerLine) === 0 && (index + 1) !== list.length) {
+            iconsOutput.textContent += `${item.name} x${item.quantity},\n`
+            itemsOutput.value += `${settings.quantityNextToPicture && settings.quantityNextToPicturePosition === "left" ? (item.quantity + "x ") : ""}${settings.nameNextToPicture && settings.nameNextToPicturePosition === "left" ? (item.name + " ") : ""}[item=${item.name}] ${settings.nameNextToPicture && settings.nameNextToPicturePosition === "right" ? (item.name + " ") : ""}${settings.quantityNextToPicture && settings.quantityNextToPicturePosition === "right" ? ("x" + item.quantity) : ""} \n`
+            } else {
             iconsOutput.textContent += `${item.name} x${item.quantity}, `
-            itemsOutput.value += `${settings.nameNextToPicture && settings.nameNextToPicturePosition === "left" ? (item.name + " ") : ""}[item=${item.name}] ${settings.nameNextToPicture && settings.nameNextToPicturePosition === "right" ? (item.name + " ") : ""}`
+            itemsOutput.value += `${settings.quantityNextToPicture && settings.quantityNextToPicturePosition === "left" ? (item.quantity + "x ") : ""}${settings.nameNextToPicture && settings.nameNextToPicturePosition === "left" ? (item.name + " ") : ""}[item=${item.name}] ${settings.nameNextToPicture && settings.nameNextToPicturePosition === "right" ? (item.name + " ") : ""}${settings.quantityNextToPicture && settings.quantityNextToPicturePosition === "right" ? ("x" + item.quantity) : ""} `
+            }
         })
     } catch {
         console.log("error")
