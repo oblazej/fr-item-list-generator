@@ -16,6 +16,10 @@ let settings = {
 
 const createList = () => {
     try {
+        if(settings.replaceList) {
+            itemsOutput.value = "";
+            iconsOutput.value = "";
+        }
         const template = document.createElement("template");
         let list = [];
         template.innerHTML = userInput.value;
@@ -51,13 +55,14 @@ const createList = () => {
     
         list.forEach(function (item, index) {
             if ((index + 1) % Number(settings.itemsPerLine) === 0 && (index + 1) !== list.length) {
-            iconsOutput.textContent += `${item.name} x${item.quantity},\n`
-            itemsOutput.value += `${settings.quantityNextToPicture && settings.quantityNextToPicturePosition === "left" ? (item.quantity + "x ") : ""}${settings.nameNextToPicture && settings.nameNextToPicturePosition === "left" ? (item.name + " ") : ""}[item=${item.name}] ${settings.nameNextToPicture && settings.nameNextToPicturePosition === "right" ? (item.name + " ") : ""}${settings.quantityNextToPicture && settings.quantityNextToPicturePosition === "right" ? ("x" + item.quantity) : ""} \n`
+            itemsOutput.value += `${settings.quantityNextToPicture && settings.quantityNextToPicturePosition === "left" ? (item.quantity + "x ") : ""}${settings.nameNextToPicture && settings.nameNextToPicturePosition === "left" ? (" " + item.name + " ") : ""}[item=${item.name}]${settings.nameNextToPicture && settings.nameNextToPicturePosition === "right" ? (" " + item.name + " ") : ""}${settings.quantityNextToPicture && settings.quantityNextToPicturePosition === "right" ? (" x" + item.quantity + " ") : ""}\n`
             } else {
-            iconsOutput.textContent += `${item.name} x${item.quantity}, `
-            itemsOutput.value += `${settings.quantityNextToPicture && settings.quantityNextToPicturePosition === "left" ? (item.quantity + "x ") : ""}${settings.nameNextToPicture && settings.nameNextToPicturePosition === "left" ? (item.name + " ") : ""}[item=${item.name}] ${settings.nameNextToPicture && settings.nameNextToPicturePosition === "right" ? (item.name + " ") : ""}${settings.quantityNextToPicture && settings.quantityNextToPicturePosition === "right" ? ("x" + item.quantity) : ""} `
+            itemsOutput.value += `${settings.quantityNextToPicture && settings.quantityNextToPicturePosition === "left" ? (item.quantity + "x ") : ""}${settings.nameNextToPicture && settings.nameNextToPicturePosition === "left" ? (" " + item.name + " ") : ""}[item=${item.name}]${settings.nameNextToPicture && settings.nameNextToPicturePosition === "right" ? (" " + item.name + " ") : ""}${settings.quantityNextToPicture && settings.quantityNextToPicturePosition === "right" ? (" x" + item.quantity + " ") : ""}`
             }
+            iconsOutput.value += `${settings.quantityNextToName && settings.quantityNextToNamePosition === "left" ? (item.quantity + "x ") : ""}${item.name}${settings.quantityNextToName && settings.quantityNextToNamePosition === "right" ? (" x" + item.quantity) : ""}, `
         })
+        itemsOutput.value = itemsOutput.value.replace(/\s+/g, ' ').trim();
+        iconsOutput.value = itemsOutput.value.replace(/\s+/g, ' ').trim();
     } catch {
         console.log("error")
     }
