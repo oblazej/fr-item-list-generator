@@ -27,28 +27,25 @@ const createList = () => {
     
         for (let i = 0; i < template.content.firstChild.childNodes.length; i++) {
             if (i % 2 === 1) {
-                if (template.content.firstChild.childNodes[i].childNodes[1].childNodes[1].childNodes[1] !== undefined) {
+                if(template.content.firstChild.childNodes[i].childNodes[1].childNodes[3].childNodes[3]) {
                     list.push({
-                        name: template.content.firstChild.childNodes[i].childNodes[1].childNodes[1].childNodes[1].getAttribute("data-name"),
-                        quantity: template.content.firstChild.childNodes[i].childNodes[1].childNodes[3].textContent.trim().replace("*", "")
-                    }
-                    )
+                        name: template.content.firstChild.childNodes[i].childNodes[1].childNodes[1].getAttribute("data-name"),
+                        quantity: template.content.firstChild.childNodes[i].childNodes[1].childNodes[3].childNodes[3].value
+                    })
                 } else {
                     if(template.content.firstChild.childNodes[i].childNodes[1].childNodes[3].childNodes[1].className === "common-checkbox") {
                         list.push({
                             name: template.content.firstChild.childNodes[i].childNodes[1].childNodes[1].getAttribute("data-name"),
-                            quantity: 1
+                            quantity: "1"
                         })
                     } else {
-                        if(template.content.firstChild.childNodes[i].childNodes[1].childNodes[3].childNodes[1].className === "common-checkbox") {
-                            list.push({
-                                name: template.content.firstChild.childNodes[i].childNodes[1].childNodes[1].getAttribute("data-name"),
-                                quantity: template.content.firstChild.childNodes[i].childNodes[1].childNodes[3].childNodes[3].value
-                            })
+                        list.push({
+                            name: template.content.firstChild.childNodes[i].childNodes[1].childNodes[1].childNodes[1].getAttribute("data-name"),
+                            quantity: template.content.firstChild.childNodes[i].childNodes[1].childNodes[3].textContent.trim().replace("*", "")
+                        })
                     }
                 }
-                }
-    
+
             }
         }
         console.log(list)
@@ -61,8 +58,8 @@ const createList = () => {
             }
             iconsOutput.value += `${settings.quantityNextToName && settings.quantityNextToNamePosition === "left" ? (item.quantity + "x ") : ""}${item.name}${settings.quantityNextToName && settings.quantityNextToNamePosition === "right" ? (" x" + item.quantity) : ""}, `
         })
-        itemsOutput.value = itemsOutput.value.replace(/\s+/g, ' ').trim();
-        iconsOutput.value = itemsOutput.value.replace(/\s+/g, ' ').trim();
+        itemsOutput.value = itemsOutput.value.replace(/[^\S\r\n]/, ' ').trim();
+        iconsOutput.value = iconsOutput.value.replace(/[^\S\r\n]/, ' ').trim();
     } catch {
         console.log("error")
     }
