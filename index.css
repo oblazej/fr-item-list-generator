@@ -35,7 +35,7 @@ main p {
 #user-input {
     display: block;
     margin: 0 auto;
-    min-width: 500px;
+    min-width: 30%;
     max-width: 90%;
     min-height: 200px;
 }
@@ -58,8 +58,12 @@ button {
     width: 200px;
 }
 
+#lists button {
+    width: 100%;
+}
+
 #user-items, #user-output {
-    width: 500px;
+    width: 30vw;
     height: 200px;
     background-color: gray;
     margin: 1rem;
@@ -81,4 +85,38 @@ button {
 
 .hidden {
     display: none;
+}
+
+#templates {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.template {
+    background-color: grey;
+    width: 180px;
+    height: 180px;
+    margin: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0.5rem;
+    align-items: center;
+    align-content: flex-start;
+}
+
+.icon {
+    width: 16%;
+    height: 16%;
+    margin: 0.2rem 0.1rem;
+    background-color: white;
+}
+
+.item-name {
+    width: 28%;
+    height: 5%;
+    margin: 0.2rem 0.1rem;
+    background-color: white;
 }
