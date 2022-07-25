@@ -1,7 +1,8 @@
-//TODO: settings, save settings in browser, recognize all types of items, recognize errors
 const userInput = document.getElementById("user-input");
 const iconsOutput = document.getElementById("user-output");
 const itemsOutput = document.getElementById("user-items");
+const radios = ["itemsPerLine", "nameNextToPicturePosition", "quantityNextToPicturePosition", "quantityNextToNamePosition"];
+const checkboxes = ["nameNextToPicture", "quantityNextToPicture", "quantityNextToName", "replaceList", "useColumns"];
 
 let settings = {
     itemsPerLine: localStorage.getItem("itemsPerLine") || "5",
@@ -11,7 +12,27 @@ let settings = {
     quantityNextToPicturePosition: localStorage.getItem("quantityNextToPicturePosition") || "left",
     quantityNextToName: !localStorage.getItem("quantityNextToName") ? 1 : Number(localStorage.getItem("quantityNextToName")),
     quantityNextToNamePosition: localStorage.getItem("quantityNextToNamePosition") || "left",
-    replaceList: !localStorage.getItem("replaceList") ? 1 : Number(localStorage.getItem("replaceList"))
+    replaceList: !localStorage.getItem("replaceList") ? 1 : Number(localStorage.getItem("replaceList")),
+    useColumns: Number(localStorage.getItem("useColumns")) || 0
+}
+
+const templateSettings = {
+    classic: {
+        itemsPerLine: "5",
+        nameNextToPicture: 0,
+        quantityNextToPicture: 0,
+        quantityNextToName: 1,
+        quantityNextToNamePosition: "left",
+        useColumns: 0
+    },
+    columns: {
+        itemsPerLine: "2",
+        nameNextToPicture: 1,
+        quantityNextToPicture: 1,
+        quantityNextToPicturePosition: "right",
+        quantityNextToName: 0,
+        useColumns: 1
+    }
 }
 
 const createList = () => {
@@ -66,20 +87,43 @@ const createList = () => {
 
 }
 
+const initTemplates = () => {
+    const templates = [...document.getElementsByClassName("template")];
+    templates.forEach((template) => template.addEventListener("click", () => {
+        console.log(templateSettings[template.getAttribute("data-template")])
+        settings = {
+            ...settings,
+            ...templateSettings[template.getAttribute("data-template")]
+        }
+        saveSettings();
+        console.log(settings)
+    }))
+}
+
 const mapRadiosToFrontend = () => {
-    const radios = ["itemsPerLine", "nameNextToPicturePosition", "quantityNextToPicturePosition", "quantityNextToNamePosition"];
     radios.forEach((radio) => document.getElementsByName(radio).forEach((element) => {if(element.value === settings[radio]) element.checked = true;
         element.addEventListener("click", function(e) {settings[radio] = e.target.value;
             localStorage.setItem(radio, settings[radio])})}));
 }
 
 const mapCheckboxesToFrontend = () => {
-    const checkboxes = ["nameNextToPicture", "quantityNextToPicture", "quantityNextToName", "replaceList"];
     checkboxes.forEach((checkbox) => {document.getElementsByName(checkbox)[0].checked = Boolean(settings[checkbox]);
-    if(!settings[checkbox] && checkbox !== "replaceList") document.getElementById(checkbox).classList.toggle("hidden"); 
+    if(!settings[checkbox] && checkbox !== "replaceList" && checkbox !== "useColumns") document.getElementById(checkbox).classList.toggle("hidden"); 
     document.getElementsByName(checkbox)[0].addEventListener("click", function(e) { settings[checkbox] = Number(e.target.checked);
-        if(checkbox !== "replaceList") document.getElementById(checkbox).classList.toggle("hidden");
+        if(checkbox !== "replaceList" && checkbox !== "useColumns") document.getElementById(checkbox).classList.toggle("hidden");
         localStorage.setItem(checkbox, settings[checkbox])})});
+}
+
+const saveSettings = () => {
+    radios.forEach((radio) => document.getElementsByName(radio).forEach((element) => {
+        localStorage.setItem(radio, settings[radio]);
+        if(element.value === settings[radio]) element.checked = true}));
+        checkboxes.forEach((checkbox) => {
+            localStorage.setItem(checkbox, settings[checkbox]);
+            document.getElementsByName(checkbox)[0].checked = Boolean(settings[checkbox]);
+            //TODO: fix
+            // if(checkbox !== "replaceList" && checkbox !== "useColumns" && document.getElementsByName(checkbox)[0].checked) document.getElementById(checkbox).classList.remove("hidden");
+        });
 }
 
 const copyToClipboard = (e) => {
@@ -96,6 +140,7 @@ const init = () => {
     document.getElementById("user-items-copy").addEventListener("click", copyToClipboard);
     mapRadiosToFrontend();
     mapCheckboxesToFrontend();
+    initTemplates();
 }
 
 init();

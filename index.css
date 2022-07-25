@@ -40,7 +40,7 @@ main p {
     min-height: 200px;
 }
 
-#tip, #lists{
+#tip, #lists {
     display: flex;
     flex-direction: row;
     justify-content: center;

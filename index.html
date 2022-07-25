@@ -22,7 +22,7 @@
       <textarea id="user-input"></textarea>
       <p><strong>Choose a template...</strong></p>
       <div id="templates">
-        <div class="template">
+        <div class="template" data-template="classic">
           <div class="icon"></div>
           <div class="icon"></div>
           <div class="icon"></div>
@@ -40,7 +40,7 @@
           <div class="item-name"></div>
           <div class="item-name"></div>
         </div>
-        <div class="template">
+        <div class="template" data-template="columns">
           <div class="icon"></div>
           <div class="item-name"></div>
           <div class="icon"></div>
@@ -112,6 +112,10 @@
         <div>
           <input type="checkbox" name="replaceList" />
           <label>Replace the list after pasting a new div</label>
+        </div>
+        <div>
+          <input type="checkbox" name="useColumns" />
+          <label>Use bbcode columns</label>
         </div>
       </form>
       <div id="tip">
